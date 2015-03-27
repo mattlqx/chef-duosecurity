@@ -1,0 +1,23 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: chef_solo
+  require_chef_omnibus: true
+  chef_omnibus_url: https://s3.amazonaws.com/articulate-chef/custom_chef_install.sh
+
+platforms:
+  - name: ubuntu-12.04
+    driver_config:
+      box: opscode-ubuntu-12.04
+      box_url: http://d1m352yddr2wlq.cloudfront.net/articulate-opscode-12.04.box
+
+      network:
+      - ["private_network", {ip: "192.168.33.20"}]
+
+suites:
+  - name: duosecurity 
+    run_list:
+      - recipe[duosecurity::default]
+    attributes:
