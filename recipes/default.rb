@@ -1,8 +1,6 @@
-duo_creds = Chef::EncryptedDataBagItem.load("credentials", "duosecurity")
-
-integration_key = duo_creds["integration_key"]
-secret_key = duo_creds["secret_key"]
-api_hostname = duo_creds["api_hostname"]
+integration_key = node.duosecurity.integration_key
+secret_key = node.duosecurity.secret_key
+api_hostname = node.duosecurity.api_hostname
 
 # Install login_duo
 # https://www.duosecurity.com/docs/duounix#1.-set-up-login_duo
