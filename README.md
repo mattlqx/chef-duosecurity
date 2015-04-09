@@ -5,6 +5,6 @@ Installs and configures [login_duo for unix](https://www.duosecurity.com/docs/du
 
 ## Attributes
 
-duosecurity.integration_key
-duosecurity.secret_key
-duosecurity.api_hostname
+- `node.duosecurity.integration_key`
+- `node.duosecurity.secret_key`
+- `node.duosecurity.api_hostname`
