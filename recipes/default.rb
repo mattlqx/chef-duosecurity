@@ -1,6 +1,19 @@
-integration_key = node.duosecurity.integration_key
-secret_key = node.duosecurity.secret_key
-api_hostname = node.duosecurity.api_hostname
+# Required attributes
+integration_key     = node["duosecurity"]["integration_key"]
+secret_key          = node["duosecurity"]["secret_key"]
+api_hostname        = node["duosecurity"]["api_hostname"]
+
+# Optional attributes
+groups              = node["duosecurity"]["groups"] if node["duosecurity"]["groups"]
+failmode            = node["duosecurity"]["failmode"] if node["duosecurity"]["failmode"]
+pushinfo            = node["duosecurity"]["pushinfo"] if node["duosecurity"]["pushinfo"]
+http_proxy          = node["duosecurity"]["http_proxy"] if node["duosecurity"]["http_proxy"]
+autopush            = node["duosecurity"]["autopush"] if node["duosecurity"]["autopush"]
+motd                = node["duosecurity"]["motd"] if node["duosecurity"]["motd"]
+prompts             = node["duosecurity"]["prompts"] if node["duosecurity"]["prompts"]
+accept_env_factor   = node["duosecurity"]["accept_env_factor"] if node["duosecurity"]["accept_env_factor"]
+fallback_local_ip   = node["duosecurity"]["fallback_local_ip"] if node["duosecurity"]["fallback_local_ip"]
+https_timeout       = node["duosecurity"]["https_timeout"] if node["duosecurity"]["https_timeout"]
 
 # Install login_duo
 # https://www.duosecurity.com/docs/duounix#1.-set-up-login_duo
@@ -17,9 +30,19 @@ template "/etc/duo/login_duo.conf" do
   source "login_duo.conf.erb"
   sensitive true
   variables(
-   integration_key: integration_key,
-   secret_key: secret_key,
-   api_hostname: api_hostname
+    integration_key: integration_key,
+    secret_key: secret_key,
+    api_hostname: api_hostname,
+    groups: groups,
+    failmode: failmode,
+    pushinfo: pushinfo,
+    http_proxy: http_proxy,
+    autopush: autopush,
+    motd: motd,
+    prompts: prompts,
+    accept_env_factor: accept_env_factor,
+    fallback_local_ip: fallback_local_ip,
+    https_timeout: https_timeout
   )
 end
 
