@@ -10,7 +10,7 @@ GRAPH
     7-zip (>= 0.0.0)
     windows (>= 0.0.0)
   chef_handler (1.1.6)
-  duosecurity (0.1.0)
+  duosecurity (1.0.0)
     ark (>= 0.0.0)
   windows (1.36.6)
     chef_handler (>= 0.0.0)
