@@ -10,4 +10,5 @@ supports            "ubuntu"
 provides            "duosecurity::default"
 recipe              "duosecurity::default", "Installs and configures login_duo"
 depends             "ark"
+source_url          "https://github.com/articulate/chef-duosecurity"
 
