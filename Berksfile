@@ -1,3 +1,3 @@
-source "http://berkshelf-api.articulate.com"
+source "https://supermarket.chef.io/"
 
 metadata
