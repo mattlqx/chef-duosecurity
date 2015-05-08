@@ -25,8 +25,17 @@ ark "duosecurity" do
 end
 
 # Config
+directory "/etc/duo" do
+  mode "0755"
+  owner "root"
+  group "root"
+end
+
 # https://www.duosecurity.com/docs/duounix#configuration-options
 template "/etc/duo/login_duo.conf" do
+  mode "0400"
+  owner "root"
+  group "root"
   source "login_duo.conf.erb"
   sensitive true
   variables(
