@@ -6,9 +6,10 @@ description         "Installs/Configures duosecurity"
 long_description    IO.read(File.join(File.dirname(__FILE__), "README.md"))
 version             "1.0.2"
 
+supports            "debian"
 supports            "ubuntu"
-provides            "duosecurity::default"
 recipe              "duosecurity::default", "Installs and configures login_duo"
+recipe              "duosecurity::package", "Installs login_duo from package"
+recipe              "duosecurity::source", "Installs login_duo from source"
 depends             "ark"
 source_url          "https://github.com/articulate/chef-duosecurity"
-
