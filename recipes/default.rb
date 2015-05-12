@@ -15,14 +15,7 @@ accept_env_factor   = node["duosecurity"]["accept_env_factor"] if node["duosecur
 fallback_local_ip   = node["duosecurity"]["fallback_local_ip"] if node["duosecurity"]["fallback_local_ip"]
 https_timeout       = node["duosecurity"]["https_timeout"] if node["duosecurity"]["https_timeout"]
 
-# Install login_duo
-# https://www.duosecurity.com/docs/duounix#1.-set-up-login_duo
-ark "duosecurity" do
-  url "https://dl.duosecurity.com/duo_unix-latest.tar.gz"
-  autoconf_opts ["--prefix=/usr"]
-  checksum "415cf02981f66ba9447df81e2fcf41e004220126640cc5f667720d46c431abf9"
-  action :install_with_make
-end
+include_recipe "duosecurity::#{node['duosecurity']['install_type']}"
 
 # Config
 directory "/etc/duo" do
