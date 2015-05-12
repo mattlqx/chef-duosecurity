@@ -17,7 +17,15 @@ platforms:
       - ["private_network", {ip: "192.168.33.20"}]
 
 suites:
-  - name: duosecurity 
+  - name: source
     run_list:
       - recipe[duosecurity::default]
     attributes:
+      duosecurity:
+        install_type: "source"
+  - name: package
+    run_list:
+      - recipe[duosecurity::default]
+    attributes:
+      duosecurity:
+        install_type: "package"
