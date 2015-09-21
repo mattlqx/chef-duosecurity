@@ -12,4 +12,4 @@ recipe              "duosecurity::default", "Installs and configures login_duo"
 recipe              "duosecurity::package", "Installs login_duo from package"
 recipe              "duosecurity::source", "Installs login_duo from source"
 depends             "ark"
-source_url          "https://github.com/articulate/chef-duosecurity"
+source_url          "https://github.com/articulate/chef-duosecurity" if respond_to?(:source_url)
