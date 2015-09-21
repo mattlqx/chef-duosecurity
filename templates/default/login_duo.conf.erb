@@ -50,7 +50,7 @@ http_proxy = <%= @http_proxy %>
 autopush = <%= @autopush %>
 <% end %>
 
-<% if @motd%>
+<% if @motd && @use_pam != 'yes'%>
 ; Print the contents of /etc/motd to screen after a successful login. Either
 ; “yes” or “no”. The default is “no”.
 ; This option is only available for login_duo.  
