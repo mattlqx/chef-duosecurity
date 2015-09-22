@@ -14,4 +14,5 @@ recipe              "duosecurity::source", "Installs login_duo from source"
 depends             "ark"
 depends             "pam"
 depends             "sshd"
+depends             "apt"
 source_url          "https://github.com/articulate/chef-duosecurity" if respond_to?(:source_url)

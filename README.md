@@ -21,3 +21,4 @@ Installs and configures [login_duo for unix](https://www.duosecurity.com/docs/du
 - `node["duosecurity"]["install_type"]` - Optional. Either "source" or "package". Defaults to "source" which will compile from source code and requires a working compiler (not managed by this cookbook).
 - `node["duosecurity"]["use_pam"]` - Optional. Either "yes" or "no". Default is "no". If "yes", Duo Unix will be setup as a pam module and ssh will be configured to use it rather than the `login_duo` binary.
 - `node["duosecurity"]["protect_sudo"]` - Optional. Either "yes" or "no". Default is "no". If "yes", then Duo two-factor authentication will be used for the sudo command if `use_pam` is also `yes`.
+- `node["duosecurity"]["use_duo_repo"]` - Optional. Either "yes" or "no". Default is "no". If "yes", the duosecurity.com apt repo will be added and latest version from the repo will be preferred if `install_type` is set to `package`.

@@ -4,3 +4,4 @@ default['duosecurity']['source_sha256'] = '415cf02981f66ba9447df81e2fcf41e004220
 default['duosecurity']['source_version'] = '1.9.14'
 default['duosecurity']['use_pam'] = 'no'
 default['duosecurity']['protect_sudo'] = 'no'
+default['duosecurity']['use_duo_repo'] = 'no'
