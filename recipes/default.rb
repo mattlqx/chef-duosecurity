@@ -16,6 +16,7 @@ fallback_local_ip   = node["duosecurity"]["fallback_local_ip"] if node["duosecur
 https_timeout       = node["duosecurity"]["https_timeout"] if node["duosecurity"]["https_timeout"]
 use_pam             = node["duosecurity"]["use_pam"] if node["duosecurity"]["use_pam"]
 protect_sudo        = node["duosecurity"]["protect_sudo"] if node["duosecurity"]["protect_sudo"]
+first_factor        = node["duosecurity"]["first_factor"] if node["duosecurity"]["first_factor"]
 
 include_recipe "duosecurity::#{node['duosecurity']['install_type']}"
 
@@ -91,7 +92,7 @@ if use_pam == 'yes'
 
   node.default['pam_d']['services']['sshd'] = {
     'main' => {
-      'pam_duo' => {
+      'auth' => {
         'interface' => 'auth',
         'control_flag' => 'required',
         'name' => '/lib64/security/pam_duo.so',
@@ -168,6 +169,15 @@ if use_pam == 'yes'
       common-password
     )
   }
+  
+  # When using password instead of pubkey, the only thing different about
+  # the above is ssh auth using common-auth instead of pam_duo.so
+  if first_factor == 'password'
+    node.default['pam_d']['services']['sshd']['main']['auth'] = {
+      'interface' => '@include',
+      'name' => 'common-auth',
+    }
+  end
 
   if protect_sudo == 'yes'
     node.default['pam_d']['services']['sudo'] = {
@@ -204,19 +214,25 @@ end
 # Enable login_duo and harden sshd
 # https://www.duosecurity.com/docs/duounix#3.-enable-login_duo
 node.default['sshd']['sshd_config']['PermitTunnel'] = 'no'
-node.default['sshd']['sshd_config']['PermitRootLogin'] = 'no'
 node.default['sshd']['sshd_config']['AllowTcpForwarding'] = 'no'
-node.default['sshd']['sshd_config']['PasswordAuthentication'] = 'no'
-node.default['sshd']['sshd_config']['RSAAuthentication'] = 'yes'
-node.default['sshd']['sshd_config']['PubkeyAuthentication'] = 'yes'
 node.default['sshd']['sshd_config']['UseDNS'] = 'no'
 
 if use_pam == 'yes'
   node.default['sshd']['sshd_config']['UsePAM'] = 'yes'
   node.default['sshd']['sshd_config']['ChallengeResponseAuthentication'] = 'yes'
-  node.default['sshd']['sshd_config']['AuthenticationMethods'] = 'publickey,keyboard-interactive'
 else
   node.default['sshd']['sshd_config']['ForceCommand'] = '/usr/sbin/login_duo'
+end
+
+case first_factor
+when 'pubkey'
+  node.default['sshd']['sshd_config']['PasswordAuthentication'] = 'no'
+  node.default['sshd']['sshd_config']['AuthenticationMethods'] = 'publickey,keyboard-interactive'
+  node.default['sshd']['sshd_config']['PubkeyAuthentication'] = 'yes'
+  node.default['sshd']['sshd_config']['RSAAuthentication'] = 'yes'
+when 'password'
+  node.default['sshd']['sshd_config']['PasswordAuthentication'] = 'yes'
+  node.default['sshd']['sshd_config']['AuthenticationMethods'] = 'keyboard-interactive'
 end
 
 include_recipe 'sshd'
