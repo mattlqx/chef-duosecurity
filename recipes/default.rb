@@ -14,8 +14,8 @@ prompts             = node["duosecurity"]["prompts"] if node["duosecurity"]["pro
 accept_env_factor   = node["duosecurity"]["accept_env_factor"] if node["duosecurity"]["accept_env_factor"]
 fallback_local_ip   = node["duosecurity"]["fallback_local_ip"] if node["duosecurity"]["fallback_local_ip"]
 https_timeout       = node["duosecurity"]["https_timeout"] if node["duosecurity"]["https_timeout"]
-use_pam             = node["duosecurity"]["use_pam"] if node["duosecurity"]["use_pam"] == "yes"
-protect_sudo        = node["duosecurity"]["protect_sudo"] if node["duosecurity"]["protect_sudo"] == "yes"
+use_pam             = node["duosecurity"]["use_pam"] if node["duosecurity"]["use_pam"]
+protect_sudo        = node["duosecurity"]["protect_sudo"] if node["duosecurity"]["protect_sudo"]
 
 include_recipe "duosecurity::#{node['duosecurity']['install_type']}"
 
@@ -56,9 +56,7 @@ end
   end
 end
 
-if use_pam
-  include_recipe 'pam'
-
+if use_pam == 'yes'
   node.default['pam_d']['services']['common-auth'] = {
     'main' => {
       'pam_unix' => {
@@ -87,7 +85,8 @@ if use_pam
         'control_flag' => 'optional',
         'name' => 'pam_cap.so',
       },
-    }
+    },
+    'includes' => [],
   }
 
   node.default['pam_d']['services']['sshd'] = {
@@ -118,6 +117,10 @@ if use_pam
         'control_flag' => 'optional',
         'name' => 'pam_keyinit.so',
         'args' => 'force revoke',
+      },
+      'include common-session' => {
+        'interface' => '@include',
+        'name' => 'common-session',
       },
       'pam_motd dynamic' => {
         'interface' => 'session',
@@ -162,12 +165,11 @@ if use_pam
     },
     'includes' => %w(
       common-account
-      common-session
       common-password
     )
   }
 
-  if protect_sudo
+  if protect_sudo == 'yes'
     node.default['pam_d']['services']['sudo'] = {
       'main' => {
         'pam_env' => {
@@ -195,18 +197,27 @@ if use_pam
       )
     }
   end
+
+  include_recipe 'pam'
 end
   
 # Enable login_duo and harden sshd
 # https://www.duosecurity.com/docs/duounix#3.-enable-login_duo
-include_recipe 'sshd'
 node.default['sshd']['sshd_config']['PermitTunnel'] = 'no'
+node.default['sshd']['sshd_config']['PermitRootLogin'] = 'no'
 node.default['sshd']['sshd_config']['AllowTcpForwarding'] = 'no'
+node.default['sshd']['sshd_config']['PasswordAuthentication'] = 'no'
+node.default['sshd']['sshd_config']['RSAAuthentication'] = 'yes'
+node.default['sshd']['sshd_config']['PubkeyAuthentication'] = 'yes'
+node.default['sshd']['sshd_config']['UseDNS'] = 'no'
 
-if use_pam
+if use_pam == 'yes'
   node.default['sshd']['sshd_config']['UsePAM'] = 'yes'
-  node.default['sshd']['sshd_config']['UseDNS'] = 'no'
   node.default['sshd']['sshd_config']['ChallengeResponseAuthentication'] = 'yes'
+  node.default['sshd']['sshd_config']['AuthenticationMethods'] = 'publickey,keyboard-interactive'
 else
   node.default['sshd']['sshd_config']['ForceCommand'] = '/usr/sbin/login_duo'
 end
+
+include_recipe 'sshd'
+
