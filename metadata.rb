@@ -4,7 +4,7 @@ maintainer_email    "ops@articulate.com"
 license             "MIT"
 description         "Installs/Configures duosecurity"
 long_description    IO.read(File.join(File.dirname(__FILE__), "README.md"))
-version             "1.2.0"
+version             "1.3.0"
 
 supports            "debian"
 supports            "ubuntu"
