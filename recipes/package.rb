@@ -1,3 +1,42 @@
-package 'login-duo' do
-  action node['duosecurity']['package_action'].to_sym
+if node['duosecurity']['use_duo_repo']
+  include_recipe 'apt'
+
+  platform = node['platform'].capitalize
+  codename = node['lsb']['codename'] == 'utopic' ? 'trusty' : node['lsb']['codename']
+
+  apt_repository 'duosecurity' do
+    uri "http://pkg.duosecurity.com/#{platform}"
+    components ['main']
+    distribution codename
+    key '15D32EFC'
+    keyserver 'pgp.mit.edu'
+    action :add
+  end
+
+  %w{
+    login-duo
+    libpam-duo
+  }.each do |pkg|
+    package pkg do
+      action :purge
+    end
+  end
+
+  package 'duo-unix' do
+    action node['duosecurity']['package_action'].to_sym
+  end
+else
+  package 'duo-unix' do
+    action :purge
+  end
+
+  pkgs = ['login-duo']
+  if node['duosecurity']['use_pam'] == 'yes'
+    pkgs << 'libpam-duo' 
+  end
+  pkgs.each do |pkg|
+    package pkg do
+      action node['duosecurity']['package_action'].to_sym
+    end
+  end
 end
