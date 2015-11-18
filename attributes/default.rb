@@ -5,3 +5,5 @@ default['duosecurity']['source_version'] = '1.9.16'
 default['duosecurity']['use_pam'] = 'no'
 default['duosecurity']['protect_sudo'] = 'no'
 default['duosecurity']['use_duo_repo'] = 'no'
+
+default['duosecurity']['apt']['keyserver'] = 'pgp.mit.edu'

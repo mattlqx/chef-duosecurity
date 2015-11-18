@@ -8,8 +8,8 @@ if node['duosecurity']['use_duo_repo']
     uri "http://pkg.duosecurity.com/#{platform}"
     components ['main']
     distribution codename
-    key '15D32EFC'
-    keyserver 'pgp.mit.edu'
+    key '1CC91FC615D32EFC'
+    keyserver node['duosecurity']['apt']['keyserver']
     action :add
   end
 
@@ -32,7 +32,7 @@ else
 
   pkgs = ['login-duo']
   if node['duosecurity']['use_pam'] == 'yes'
-    pkgs << 'libpam-duo' 
+    pkgs << 'libpam-duo'
   end
   pkgs.each do |pkg|
     package pkg do
