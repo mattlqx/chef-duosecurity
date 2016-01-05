@@ -8,10 +8,10 @@ provisioner:
   chef_omnibus_url: https://s3.amazonaws.com/articulate-chef/custom_chef_install.sh
 
 platforms:
-  - name: ubuntu-12.04
+  - name: ubuntu
     driver_config:
-      box: opscode-ubuntu-12.04
-      box_url: http://d1m352yddr2wlq.cloudfront.net/articulate-opscode-12.04.box
+      box: ubuntu-12.04.5-chef-12.6.0
+      box_url: http://d30mo6j6uouwb9.cloudfront.net/vagrant-boxes/ubuntu-12.04.5-chef-12.6.0-virtualbox.box
 
       network:
       - ["private_network", {ip: "192.168.33.20"}]
