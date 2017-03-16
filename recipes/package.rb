@@ -8,8 +8,7 @@ if node['duosecurity']['use_duo_repo']
     uri "http://pkg.duosecurity.com/#{platform}"
     components ['main']
     distribution codename
-    key '1CC91FC615D32EFC'
-    keyserver node['duosecurity']['apt']['keyserver']
+    key 'https://duo.com/APT-GPG-KEY-DUO'
     action :add
   end
 
