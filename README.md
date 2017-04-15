@@ -1,7 +1,13 @@
 # duosecurity Cookbook
 ====================
 
-Installs and configures [login_duo for unix](https://www.duosecurity.com/docs/duounix)
+Installs and configures either
+[login_duo](https://duo.com/docs/loginunix) or
+[pam_duo](https://duo.com/docs/duounix) depending on the attribute
+settings.
+
+You will need to configure sshd to make use of it. See the upstream
+docs for information.
 
 ## Attributes
 
