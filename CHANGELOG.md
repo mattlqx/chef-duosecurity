@@ -3,9 +3,13 @@ duosecurity CHANGELOG
 
 This file is used to list changes made in each version of the duosecurity cookbook.
 
-0.1.0
+1.3.3
 -----
-- [your_name] - Initial release of duosecurity
+- [mattlqx] - Add `issues_url`, `chef_version` to metadata.rb. Taken ownership of cookbook. 🤹🏻
+
+1.3.2
+-----
+- [mattlqx] - Fix GPG keys for Duo Security package repo
 
 - - -
 Check the [Markdown Syntax Guide](http://daringfireball.net/projects/markdown/syntax) for help with Markdown.

@@ -4,7 +4,9 @@ maintainer_email    "ops@articulate.com"
 license             "MIT"
 description         "Installs/Configures duosecurity"
 long_description    IO.read(File.join(File.dirname(__FILE__), "README.md"))
-version             "1.3.2"
+version             "1.3.3"
+
+chef_version        '~> 12'
 
 supports            "debian"
 supports            "ubuntu"
@@ -16,3 +18,4 @@ depends             "pam"
 depends             "sshd"
 depends             "apt"
 source_url          "https://github.com/articulate/chef-duosecurity" if respond_to?(:source_url)
+issues_url          "https://github.com/mattlqx/chef-duosecurity/issues" if respond_to?(:issues_url)
