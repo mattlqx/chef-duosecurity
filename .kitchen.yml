@@ -5,14 +5,11 @@ driver:
 provisioner:
   name: chef_solo
   require_chef_omnibus: true
-  chef_omnibus_url: https://s3.amazonaws.com/articulate-chef/custom_chef_install.sh
+  chef_omnibus_install_options: '-v 12.19.36'
 
 platforms:
-  - name: ubuntu
+  - name: ubuntu-16.04
     driver_config:
-      box: ubuntu-12.04.5-chef-12.6.0
-      box_url: http://d30mo6j6uouwb9.cloudfront.net/vagrant-boxes/ubuntu-12.04.5-chef-12.6.0-virtualbox.box
-
       network:
       - ["private_network", {ip: "192.168.33.20"}]
 
