@@ -6,7 +6,7 @@ description         "Installs/Configures duosecurity two-factor system authentic
 long_description    IO.read(File.join(File.dirname(__FILE__), "README.md"))
 version             "1.3.4"
 
-chef_version        '~> 12'
+chef_version        '>= 12.1'
 
 supports            "debian"
 supports            "ubuntu"
