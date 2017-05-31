@@ -3,6 +3,11 @@ duosecurity CHANGELOG
 
 This file is used to list changes made in each version of the duosecurity cookbook.
 
+1.3.5
+-----
+- [mattlqx] - Bump to latest duo_unix version.
+- [whiteley] - Change metadata to support Chef 13.
+
 1.3.4
 -----
 - [whiteley] - bump to latest duo_unix version
