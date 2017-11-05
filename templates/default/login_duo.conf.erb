@@ -8,57 +8,55 @@ skey = <%= @secret_key %>
 ; Duo API hostname
 host = <%= @api_hostname %>
 
-
 ; Optional configuration
-
-<% if @groups%>
+<% if @groups -%>
 ; If specified, Duo authentication is required only for users whose primary
 ; group or supplementary group list matches one of the space-separated pattern
 ; lists.
 
 groups = <%= @groups %>
-<% end %>
 
-<% if @failmode%>
+<% end -%>
+<% if @failmode -%>
 ; On service or configuration errors that prevent Duo authentication, fail “safe”
-; (allow access) or “secure” (deny access). The default is “safe”.  
+; (allow access) or “secure” (deny access). The default is “safe”.
 
 failmode = <%= @failmode %>
-<% end %>
 
-<% if @pushinfo%>
+<% end -%>
+<% if @pushinfo -%>
 ; Include information such as the command to be executed in the Duo Push message.
-; Either “yes” or “no”. The default is “no”.  
+; Either “yes” or “no”. The default is “no”.
 
 pushinfo = <%= @pushinfo %>
-<% end %>
 
-<% if @http_proxy%>
+<% end -%>
+<% if @http_proxy -%>
 ; Use the specified HTTP proxy, same format as the HTTP_PROXY environment
-; variable. (honored by wget, curl, etc.).  
+; variable. (honored by wget, curl, etc.).
 
 http_proxy = <%= @http_proxy %>
-<% end %>
 
-<% if @autopush%>
+<% end -%>
+<% if @autopush -%>
 ; Either “yes” or “no”. Default is “no”. If “yes”, Duo Unix will automatically
 ; send a push login request to the user’s phone, falling back on a phone call if
 ; push is unavailable. If “no”, the user will be prompted to choose an
 ; authentication method.
-; When configured with autopush = yes, we recommend setting prompts = 1.  
+; When configured with autopush = yes, we recommend setting prompts = 1.
 
 autopush = <%= @autopush %>
-<% end %>
 
-<% if @motd && @use_pam != 'yes'%>
+<% end -%>
+<% if @motd && @use_pam != 'yes' -%>
 ; Print the contents of /etc/motd to screen after a successful login. Either
 ; “yes” or “no”. The default is “no”.
-; This option is only available for login_duo.  
+; This option is only available for login_duo.
 
 motd = <%= @motd %>
-<% end %>
 
-<% if @prompts%>
+<% end -%>
+<% if @prompts -%>
 ; If a user fails to authenticate with a second factor, Duo Unix will prompt the
 ; user to authenticate again. This option sets the maximum number of prompts that
 ; Duo Unix will display before denying access. Must be 1, 2, or 3. Default is 3.
@@ -69,26 +67,26 @@ motd = <%= @motd %>
 ; When configured with autopush = yes, we recommend setting prompts = 1.
 
 prompts = <%= @prompts %>
-<% end %>
 
-<% if @accept_env_factor%>
+<% end -%>
+<% if @accept_env_factor -%>
 ; Look for factor selection or passcode in the $DUO_PASSCODE environment variable
 ; before prompting the user for input. When $DUO_PASSCODE is non-empty, it will
 ; override autopush.
 ; The SSH client will need SendEnv DUO_PASSCODE in its configuration, and the SSH
 ; server will similarily need AcceptEnv DUO_PASSCODE.
-; Default is "no".  
+; Default is "no".
 
 accept_env_factor = <%= @accept_env_factor %>
-<% end %>
 
-<% if @fallback_local_ip%>
+<% end -%>
+<% if @fallback_local_ip -%>
 ; Duo Unix reports the IP address of the authorizing user, for the purposes of
 ; authorization and whitelisting. If Duo Unix cannot detect the IP address of the
 ; client, setting fallback_local_ip = yes will cause Duo Unix to send the IP
 ; address of the server it is running on.
 ; If you are using IP whitelisting, enabling this option could cause unauthorized
-; logins if the local IP is listed in the whitelist.  
+; logins if the local IP is listed in the whitelist.
 ; Set to the number of seconds to wait for HTTPS responses from Duo Security. If
 ; Duo Security takes longer than the configured number of seconds to respond to
 ; the preauth API call, the configured failmode is triggered. Other network
@@ -96,11 +94,10 @@ accept_env_factor = <%= @accept_env_factor %>
 ; handshake have their own independent timeout and retry logic.
 
 fallback_local_ip = <%= @fallback_local_ip %>
-<% end %>
 
-<% if @https_timeout%>
+<% end -%>
+<% if @https_timeout -%>
 ; Default is 0, which disables the HTTPS timeout.
 
 https_timeout = <%= @https_timeout %>
-<% end %>
-
+<% end -%>
