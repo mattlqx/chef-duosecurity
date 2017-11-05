@@ -12,10 +12,10 @@ if node['duosecurity']['use_duo_repo']
     action :add
   end
 
-  %w{
+  %w[
     login-duo
     libpam-duo
-  }.each do |pkg|
+  ].each do |pkg|
     package pkg do
       action :purge
     end
@@ -30,9 +30,8 @@ else
   end
 
   pkgs = ['login-duo']
-  if node['duosecurity']['use_pam'] == 'yes'
-    pkgs << 'libpam-duo'
-  end
+  pkgs << 'libpam-duo' if node['duosecurity']['use_pam'] == 'yes'
+
   pkgs.each do |pkg|
     package pkg do
       action node['duosecurity']['package_action'].to_sym
