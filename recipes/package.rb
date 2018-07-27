@@ -2,7 +2,14 @@ if node['duosecurity']['use_duo_repo']
   include_recipe 'apt'
 
   platform = node['platform'].capitalize
-  codename = node['lsb']['codename'] == 'utopic' ? 'trusty' : node['lsb']['codename']
+  codename = case node['lsb']['codename']
+             when 'utopic'
+               'trusty'
+             when 'bionic'
+               'xenial'
+             else
+               node['lsb']['codename']
+             end
 
   apt_repository 'duosecurity' do
     uri "http://pkg.duosecurity.com/#{platform}"
