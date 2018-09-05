@@ -3,6 +3,10 @@ duosecurity CHANGELOG
 
 This file is used to list changes made in each version of the duosecurity cookbook.
 
+1.4.1
+----
+- [mattlqx] - Remove expired Duo repo GPG key and re-add.
+
 1.4.0
 ----
 - [mattlqx] - Compatibility for Ubuntu 18.04 Bionic Beaver.
