@@ -4,17 +4,14 @@ driver:
 
 provisioner:
   name: chef_zero
-  require_chef_omnibus: 13.8.5
+  channel: stable
+  product_name: chef
+  product_version: 14.11.21
+  deprecations_as_errors: false
 
 platforms:
   - name: ubuntu-16.04
-    driver_config:
-      network:
-      - ["private_network", {ip: "192.168.33.20"}]
   - name: ubuntu-18.04
-    driver_config:
-      network:
-      - ["private_network", {ip: "192.168.33.20"}]
 
 suites:
   - name: source
