@@ -1,7 +1,11 @@
 # Install login_duo
 # https://www.duosecurity.com/docs/duounix#1.-set-up-login_duo
 
-include_recipe 'build-essential'
+apt_update 'duo' do
+  action :periodic
+end
+
+build_essential 'duo'
 
 configure_opts = ['--prefix=/usr']
 

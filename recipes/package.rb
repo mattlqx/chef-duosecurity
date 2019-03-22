@@ -29,7 +29,9 @@ if node['duosecurity']['use_duo_repo']
     action expired ? [:remove, :add] : :add
   end
 
-  include_recipe 'apt'
+  apt_update 'duo' do
+    action :periodic
+  end
 
   %w[
     login-duo
