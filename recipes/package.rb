@@ -5,8 +5,6 @@ if node['duosecurity']['use_duo_repo']
   codename = case node['lsb']['codename']
              when 'utopic'
                'trusty'
-             when 'bionic'
-               'xenial'
              else
                node['lsb']['codename']
              end
@@ -23,9 +21,10 @@ if node['duosecurity']['use_duo_repo']
 
   apt_repository 'duosecurity' do
     uri "http://pkg.duosecurity.com/#{platform}"
+    arch 'amd64' if codename == 'bionic'
     components ['main']
     distribution codename
-    key 'https://duo.com/APT-GPG-KEY-DUO'
+    key 'https://duo.com/DUO-GPG-PUBLIC-KEY.asc'
     action expired ? [:remove, :add] : :add
   end
 
