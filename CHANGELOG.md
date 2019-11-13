@@ -3,6 +3,13 @@ duosecurity CHANGELOG
 
 This file is used to list changes made in each version of the duosecurity cookbook.
 
+2.0.1
+- [mattlqx] - Update Duo repo GPG key source URL again.
+
+2.0.0
+----
+- [mattlqx] - Use built-in apt_update and build_essential resources. Require Chef 14+
+
 1.4.1
 ----
 - [mattlqx] - Remove expired Duo repo GPG key and re-add.
