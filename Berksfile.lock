@@ -6,7 +6,7 @@ DEPENDENCIES
 GRAPH
   ark (5.0.0)
     seven_zip (>= 0.0.0)
-  duosecurity (2.1.0)
+  duosecurity (2.1.1)
     ark (>= 0.0.0)
     pam (>= 0.0.0)
     sshd (>= 0.0.0)

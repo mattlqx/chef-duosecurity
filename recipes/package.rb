@@ -1,7 +1,7 @@
 require 'mixlib/shellout'
 
 if node['duosecurity']['package_file']
-  package 'duo-unix' do
+  dpkg_package 'duo-unix' do
     source node['duosecurity']['package_file']
     action node['duosecurity']['package_action'].to_sym
   end

@@ -20,6 +20,9 @@ platforms:
         name: ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-arm64-server-*
     provisioner:
       product_version: 14.15.6
+    attributes:
+      duosecurity:
+        package_file: /tmp/kitchen/cache/duo-unix-1.11.4_arm64.deb
   - name: ubuntu-20.04
 
 suites:

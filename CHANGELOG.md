@@ -3,12 +3,18 @@ duosecurity CHANGELOG
 
 This file is used to list changes made in each version of the duosecurity cookbook.
 
+2.1.1
+-----
+- [mattlqx] - use `dpkg_package` instead of `package` for installing from local file
+
 2.1.0
+-----
 - [mattlqx] - Add attribute for location of pam module when installing from source.
 - [mattlqx] - Add attribute to allow installing package from a local path.
 - [mattlqx] - Bump duosecurity source version to 1.11.4.
 
 2.0.1
+-----
 - [mattlqx] - Update Duo repo GPG key source URL again.
 
 2.0.0
