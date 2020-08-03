@@ -27,7 +27,7 @@ docs for information.
 - `node["duosecurity"]["install_type"]` - Optional. Either "source" or "package". Defaults to "source" which will compile from source code and requires a working compiler (not managed by this cookbook).
 - `node["duosecurity"]["package_file"]` - Instead of installing package from DUO or OS repos, install the `duo-unix` package from the local file specified by this path.
 - `node["duosecurity"]["use_pam"]` - Optional. Either "yes" or "no". Default is "no". If "yes", Duo Unix will be setup as a pam module and ssh will be configured to use it rather than the `login_duo` binary. Requires OpenSSH 6.2+.
-- `node["duosecurity"]["pam_directory"]` - Path to install pam module in if enabled and built from source. Defaults to `/lib64/security`.
+- `node["duosecurity"]["pam_directory"]` - Path to install pam module in if enabled and built from source. Defaults to `/lib/#{node['kernel']['machine']}-linux-gnu/security`.
 - `node["duosecurity"]["protect_sudo"]` - Optional. Either "yes" or "no". Default is "no". If "yes", then Duo two-factor authentication will be used for the sudo command if `use_pam` is also `yes`.
 - `node["duosecurity"]["use_duo_repo"]` - Optional. Either "yes" or "no". Default is "no". If "yes", the duosecurity.com apt repo will be added and latest version from the repo will be preferred if `install_type` is set to `package`.
 - `node["duosecurity"]["first_factor"]` - Optional. Either "pubkey", "password" or undefined. `pubkey` will alter sshd configuration to use public key auth as first factor. `password` will alter sshd configuration to use password as first factor. Leaving undefined will not set default ssh authentication configuration. Requires `use_pam` to be `yes`.
