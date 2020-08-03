@@ -1,8 +1,10 @@
 default['duosecurity']['install_type'] = 'source'
 default['duosecurity']['package_action'] = 'upgrade'
-default['duosecurity']['source_sha256'] = 'e2df2be50539c54c87cdc4964fdfee0fbd79a3f15fdfd807e94941291b5d6197'
-default['duosecurity']['source_version'] = '1.10.1'
+default['duosecurity']['package_file'] = nil
+default['duosecurity']['source_sha256'] = '4fdb1a11473e167b7c062bd366807b9c436192a16b25031f2cb6e72f8da313c3'
+default['duosecurity']['source_version'] = '1.11.4'
 default['duosecurity']['use_pam'] = 'no'
+default['duosecurity']['pam_directory'] = "/lib/#{node['kernel']['machine']}-linux-gnu/security"
 default['duosecurity']['protect_sudo'] = 'no'
 default['duosecurity']['use_duo_repo'] = 'no'
 

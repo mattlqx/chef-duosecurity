@@ -1,13 +1,13 @@
 require 'mixlib/shellout'
 
-if node['duosecurity']['use_duo_repo']
+if node['duosecurity']['package_file']
+  package 'duo-unix' do
+    source node['duosecurity']['package_file']
+    action node['duosecurity']['package_action'].to_sym
+  end
+elsif node['duosecurity']['use_duo_repo']
   platform = node['platform'].capitalize
-  codename = case node['lsb']['codename']
-             when 'utopic'
-               'trusty'
-             else
-               node['lsb']['codename']
-             end
+  codename = node['lsb']['codename']
 
   # Determine if key is expired
   expired = Mixlib::ShellOut.new("apt-key list --list-keys 'Duo Security Package Signing' | grep expired") \

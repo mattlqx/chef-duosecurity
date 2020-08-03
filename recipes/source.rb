@@ -7,13 +7,15 @@ end
 
 build_essential 'duo'
 
+package 'libssl-dev'
+
 configure_opts = ['--prefix=/usr']
 
 if node['duosecurity']['use_pam'] == 'yes'
   package 'libpam-dev' do
     action :install
   end
-  configure_opts << '--with-pam=/lib64/security'
+  configure_opts << "--with-pam=#{node['duosecurity']['pam_directory']}"
 end
 
 ark 'duosecurity' do
