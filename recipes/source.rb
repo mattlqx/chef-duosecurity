@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Install login_duo
 # https://www.duosecurity.com/docs/duounix#1.-set-up-login_duo
 

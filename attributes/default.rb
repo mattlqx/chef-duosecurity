@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 default['duosecurity']['install_type'] = 'source'
 default['duosecurity']['package_action'] = 'upgrade'
 default['duosecurity']['package_file'] = nil

@@ -6,24 +6,23 @@ provisioner:
   name: chef_zero
   channel: stable
   product_name: chef
-  product_version: 14.11.21
+  product_version: 15.15.1
   deprecations_as_errors: false
 
 platforms:
-  - name: ubuntu-18.04
-  - name: ubuntu-18.04-arm
+  - name: ubuntu-20.04
+  - name: ubuntu-20.04-arm
     driver:
       name: ec2
       instance_type: m6g.medium
       image_search:
         owner-id: "099720109477"
-        name: ubuntu/images/hvm-ssd/ubuntu-bionic-18.04-arm64-server-*
+        name: ubuntu/images/hvm-ssd/ubuntu-focal-20.04-arm64-server-*
     provisioner:
-      product_version: 14.15.6
+      product_version: 15.15.1
     attributes:
       duosecurity:
         package_file: /tmp/kitchen/cache/duo-unix-1.11.4_arm64.deb
-  - name: ubuntu-20.04
 
 suites:
   - name: source

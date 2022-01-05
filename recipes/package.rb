@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'mixlib/shellout'
 
 if node['duosecurity']['package_file']
@@ -10,9 +12,8 @@ elsif node['duosecurity']['use_duo_repo']
   codename = node['lsb']['codename']
 
   # Determine if key is expired
-  expired = Mixlib::ShellOut.new("apt-key list --list-keys 'Duo Security Package Signing' | grep expired") \
-                            .run_command \
-                            .exitstatus == 0
+  expired = shell_out("apt-key list --list-keys 'Duo Security Package Signing' | grep expired") \
+            .exitstatus.zero?
 
   execute 'remove expired duo repo key' do
     command 'apt-key del "30BF E024 2B19 592E B122  211D 1CC9 1FC6 15D3 2EFC"; apt-key del 15D32EFC'
@@ -25,7 +26,7 @@ elsif node['duosecurity']['use_duo_repo']
     components ['main']
     distribution codename
     key 'https://duo.com/DUO-GPG-PUBLIC-KEY.asc'
-    action expired ? [:remove, :add] : :add
+    action expired ? %i[remove add] : :add
   end
 
   apt_update 'duo' do

@@ -4,14 +4,12 @@ DEPENDENCIES
     metadata: true
 
 GRAPH
-  ark (5.0.0)
-    seven_zip (>= 0.0.0)
-  duosecurity (2.1.1)
+  ark (6.0.3)
+    seven_zip (>= 3.1)
+  duosecurity (2.2.0)
     ark (>= 0.0.0)
     pam (>= 0.0.0)
     sshd (>= 0.0.0)
   pam (1.1.0)
-  seven_zip (3.1.2)
-    windows (>= 0.0.0)
-  sshd (3.0.0)
-  windows (7.0.0)
+  seven_zip (4.2.2)
+  sshd (3.1.1)

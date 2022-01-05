@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Required attributes
 integration_key     = node['duosecurity']['integration_key']
 secret_key          = node['duosecurity']['secret_key']
@@ -64,30 +66,30 @@ if use_pam == 'yes'
         'interface' => 'auth',
         'control_flag' => 'requisite',
         'name' => 'pam_unix.so',
-        'args' => 'nullok_secure',
+        'args' => 'nullok_secure'
       },
       'pam_duo' => {
         'interface' => 'auth',
         'control_flag' => '[success=1 default=ignore]',
-        'name' => '/lib64/security/pam_duo.so',
+        'name' => '/lib64/security/pam_duo.so'
       },
       'pam_deny' => {
         'interface' => 'auth',
         'control_flag' => 'requisite',
-        'name' => 'pam_deny.so',
+        'name' => 'pam_deny.so'
       },
       'pam_permit' => {
         'interface' => 'auth',
         'control_flag' => 'required',
-        'name' => 'pam_permit.so',
+        'name' => 'pam_permit.so'
       },
       'pam_cap' => {
         'interface' => 'auth',
         'control_flag' => 'optional',
-        'name' => 'pam_cap.so',
-      },
+        'name' => 'pam_cap.so'
+      }
     },
-    'includes' => [],
+    'includes' => []
   }
 
   node.default['pam_d']['services']['sshd'] = {
@@ -95,74 +97,74 @@ if use_pam == 'yes'
       'auth' => {
         'interface' => 'auth',
         'control_flag' => 'required',
-        'name' => '/lib64/security/pam_duo.so',
+        'name' => '/lib64/security/pam_duo.so'
       },
       'pam_nologin' => {
         'interface' => 'account',
         'control_flag' => 'required',
-        'name' => 'pam_nologin.so',
+        'name' => 'pam_nologin.so'
       },
       'pam_selinux close' => {
         'interface' => 'session',
         'control_flag' => '[success=ok ignore=ignore module_unknown=ignore default=bad]',
         'name' => 'pam_selinux.so',
-        'args' => 'close',
+        'args' => 'close'
       },
       'pam_loginuid' => {
         'interface' => 'session',
         'control_flag' => 'required',
-        'name' => 'pam_loginuid.so',
+        'name' => 'pam_loginuid.so'
       },
       'pam_keyinit' => {
         'interface' => 'session',
         'control_flag' => 'optional',
         'name' => 'pam_keyinit.so',
-        'args' => 'force revoke',
+        'args' => 'force revoke'
       },
       'include common-session' => {
         'interface' => '@include',
-        'name' => 'common-session',
+        'name' => 'common-session'
       },
       'pam_motd dynamic' => {
         'interface' => 'session',
         'control_flag' => 'optional',
         'name' => 'pam_motd.so',
-        'args' => 'motd=/run/motd.dynamic',
+        'args' => 'motd=/run/motd.dynamic'
       },
       'pam_motd' => {
         'interface' => 'session',
         'control_flag' => 'optional',
         'name' => 'pam_motd.so',
-        'args' => 'noupdate',
+        'args' => 'noupdate'
       },
       'pam_mail' => {
         'interface' => 'session',
         'control_flag' => 'optional',
         'name' => 'pam_mail.so',
-        'args' => 'standard noenv',
+        'args' => 'standard noenv'
       },
       'pam_limits' => {
         'interface' => 'session',
         'control_flag' => 'required',
-        'name' => 'pam_limits.so',
+        'name' => 'pam_limits.so'
       },
       'pam_env' => {
         'interface' => 'session',
         'control_flag' => 'required',
-        'name' => 'pam_env.so',
+        'name' => 'pam_env.so'
       },
       'pam_env locale' => {
         'interface' => 'session',
         'control_flag' => 'required',
         'name' => 'pam_env.so',
-        'args' => 'user_readenv=1 envfile=/etc/default/locale',
+        'args' => 'user_readenv=1 envfile=/etc/default/locale'
       },
       'pam_selinux open' => {
         'interface' => 'session',
         'control_flag' => '[success=ok ignore=ignore module_unknown=ignore default=bad]',
         'name' => 'pam_selinux.so',
-        'args' => 'open',
-      },
+        'args' => 'open'
+      }
     },
     'includes' => %w[
       common-account
@@ -175,7 +177,7 @@ if use_pam == 'yes'
   if first_factor == 'password'
     node.default['pam_d']['services']['sshd']['main']['auth'] = {
       'interface' => '@include',
-      'name' => 'common-auth',
+      'name' => 'common-auth'
     }
   end
 
@@ -186,18 +188,18 @@ if use_pam == 'yes'
           'interface' => 'auth',
           'control_flag' => 'required',
           'name' => 'pam_env.so',
-          'args' => 'readenv=1 user_readenv=0',
+          'args' => 'readenv=1 user_readenv=0'
         },
         'pam_env locale' => {
           'interface' => 'auth',
           'control_flag' => 'required',
           'name' => 'pam_env.so',
-          'args' => 'readenv=1 envfile=/etc/default/locale user_readenv=0',
+          'args' => 'readenv=1 envfile=/etc/default/locale user_readenv=0'
         },
         'pam_duo' => {
           'interface' => 'auth',
           'control_flag' => 'sufficient',
-          'name' => '/lib64/security/pam_duo.so',
+          'name' => '/lib64/security/pam_duo.so'
         }
       },
       'includes' => %w[
