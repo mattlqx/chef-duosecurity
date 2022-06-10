@@ -21,8 +21,8 @@ elsif node['duosecurity']['use_duo_repo']
   end
 
   apt_repository 'duosecurity' do
-    uri "http://pkg.duosecurity.com/#{platform}"
-    arch 'amd64' if codename == 'bionic'
+    uri "https://pkg.duosecurity.com/#{platform}"
+    arch 'amd64' if %w(bionic focal).include? codename
     components ['main']
     distribution codename
     key 'https://duo.com/DUO-GPG-PUBLIC-KEY.asc'
