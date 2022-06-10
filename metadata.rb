@@ -5,7 +5,7 @@ maintainer          'Matt Kulka'
 maintainer_email    'matt@lqx.net'
 license             'MIT'
 description         'Installs/Configures duosecurity two-factor system authentication on Ubuntu/Debian'
-version             '3.0.0'
+version             '3.0.1'
 
 source_url 'https://github.com/mattlqx/chef-duosecurity'
 issues_url 'https://github.com/mattlqx/chef-duosecurity/issues'
